@@ -24,7 +24,6 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.account_id = current_account.id
-    @property.image.attach(params[:property][:image])
     respond_to do |format|
       if @property.save
         format.html { redirect_to @property, notice: "Property was successfully created." }
@@ -66,6 +65,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :address, :price, :rooms, :bathrooms)
+      params.require(:property).permit(:image, :name, :address, :price, :rooms, :bathrooms)
     end
 end
