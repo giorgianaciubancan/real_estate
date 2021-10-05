@@ -4,5 +4,8 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-
+require("jquery");
+require("./includes/properties");
+//= require jquery
+//= require jquery_ujs
 Rails.start()

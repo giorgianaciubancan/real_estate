@@ -21,6 +21,7 @@ gem "devise"
 gem 'carrierwave', '~>1.0'
 gem 'fog', '~> 1.37.0'
 gem 'mini_magick'
+gem 'jquery-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

@@ -27,6 +27,16 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :parking_spaces %>
+    <%= form.number_field :parking_spaces, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :details %>
+    <%= form.text_area :details, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= form.file_field :image %>
   </div>
 
