@@ -22,8 +22,11 @@ gem 'carrierwave', '~>1.0'
 gem 'fog', '~> 1.37.0'
 gem 'mini_magick'
 gem 'jquery-rails'
+gem 'turbolinks', '~> 5.2.0'
+gem 'font_awesome5_rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'pry', '~> 0.13.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
