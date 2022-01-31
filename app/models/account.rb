@@ -6,6 +6,7 @@ class Account < ApplicationRecord
   mount_uploader :image, ProfilePictureUploader
   mount_uploader :cover_image, ProfilePictureUploader
   has_many :properties
+  has_many :meetings
 
   def full_name
     "#{first_name} #{last_name}"

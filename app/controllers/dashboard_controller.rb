@@ -2,6 +2,9 @@ class DashboardController < ApplicationController
   before_action :set_sidebar
 
   def index
+    @agent = current_account
+    start_date = params.fetch(:start_time, Date.today).to_date
+    @meetings = Meeting.where(account_id: current_account.id)
   end
 
   def profile
@@ -13,7 +16,7 @@ class DashboardController < ApplicationController
     @properties_leased = Property.where(account_id: @account.id).leased.count
     @properties_for_rent = Property.where(account_id: @account.id).for_rent.count
 
-    
+
   end
 
   private

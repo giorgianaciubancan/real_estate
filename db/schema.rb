@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_105402) do
+ActiveRecord::Schema.define(version: 2022_01_23_135842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,19 @@ ActiveRecord::Schema.define(version: 2021_10_14_105402) do
     t.boolean "admin", default: false
     t.text "details"
     t.string "cover_image"
+    t.string "calendar_id"
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_time"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "end_time"
+    t.index ["account_id"], name: "index_meetings_on_account_id"
   end
 
   create_table "posts", force: :cascade do |t|
