@@ -4,3 +4,30 @@
 #notifications {
   dispaly: none;
 }
+
+body{
+  padding-top: 56px;
+}
+
+.img-circle{
+  height:100px;
+  width: 100px;
+  border-radius: 50%;
+}
+
+#home-banner .jumbotron{
+  background: image-url("banners/home2.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+#blog-banner .jumbotron{
+  background: image-url("banners/blog.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.main-banner .jumbotron{
+  color: #fff;
+  h1, p{
+    text-shadow: 1px 1px 1px #777;
+  }
+}

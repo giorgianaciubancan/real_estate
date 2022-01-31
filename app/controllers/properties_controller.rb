@@ -1,14 +1,19 @@
 class PropertiesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_property, only: %i[ show edit update destroy ]
   before_action :authenticate_account!, only: [:new, :create, :destroy]
+  before_action :set_sidebar, except: [:show]
 
   # GET /properties or /properties.json
   def index
-    @properties = Property.all
+    @properties = Property.where(account_id: current_account.id)
   end
 
   # GET /properties/1 or /properties/1.json
   def show
+    @agent = @property.account
+    #show all properties except the one that we are looking at right now
+    @agent_properties = Property.where(account_id: @agent.id).where.not(id: @property.id)
   end
 
   # GET /properties/new
@@ -24,7 +29,6 @@ class PropertiesController < ApplicationController
   def create
     @property = Property.new(property_params)
     @property.account_id = current_account.id
-    @property.image.attach(params[:property][:image])
     respond_to do |format|
       if @property.save
         format.html { redirect_to @property, notice: "Property was successfully created." }
@@ -58,14 +62,39 @@ class PropertiesController < ApplicationController
     end
   end
 
+  def email_agent
+    #trigger email send
+    agent_id = params[:agent_id]
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    email = params[:email]
+    message = params[:message]
+
+    logger.debug "Agent ID: #{agent_id}"
+    logger.debug "First name: #{first_name}"
+    logger.debug "Last name: #{last_name}"
+    logger.debug "Email: #{email}"
+    logger.debug "Message: #{message}"
+
+    ContactMailer.email_agent( agent_id, first_name, last_name, email, message).deliver_now
+    #resonse to script
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
       @property = Property.find(params[:id])
     end
 
+    def set_sidebar
+      @show_sidebar = true
+    end
+
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:name, :address, :price, :rooms, :bathrooms)
+      params.require(:property).permit(:image, :name, :address, :price, :rooms, :bathrooms, :parking_spaces, :details, :for_sale, :available_date, :status)
     end
 end

@@ -20,9 +20,10 @@
         <td><%= property.price %></td>
         <td><%= property.rooms %></td>
         <td><%= property.bathrooms %></td>
-        <td><%= link_to 'Show', property %></td>
-        <td><%= link_to 'Edit', edit_property_path(property) %></td>
-        <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', property ,class: "btn btn-success"%></td>
+        <td><%= link_to 'Edit', edit_property_path(property) ,class: "btn btn-success"%></td>
+        <td><%= button_to 'Destroy', property, :method => :delete, :class => :destroy,  :confirm => 'Are you sure?',class: "btn btn-success"  %></td>
+
       </tr>
     <% end %>
   </tbody>
